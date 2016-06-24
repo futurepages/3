@@ -4,6 +4,7 @@ import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.futurepages.core.config.Apps;
 import org.futurepages.util.FileUtil;
+import org.futurepages.util.Is;
 import org.futurepages.util.ModuleUtil;
 
 import java.io.File;
@@ -59,7 +60,9 @@ public class BuildWidgetsets extends Task {
 		}
 		StringBuilder resultSB = new StringBuilder();
 		for(String dep: deps){
-			resultSB.append("\t<inherits name=\"").append(dep).append("\"/>\n");
+			if(!Is.empty(dep)){
+				resultSB.append("\t<inherits name=\"").append(dep).append("\"/>\n");
+			}
 		}
 		return resultSB.toString();
 	}
